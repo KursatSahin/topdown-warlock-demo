@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: LightProjectileLTex_ScrollDistortAdd
-  m_Shader: {fileID: -6465566751694194690, guid: bfe59e2d96e668c4bb22b455467fdc43, type: 3}
+  m_Name: ElectricSheet_Add
+  m_Shader: {fileID: -6465566751694194690, guid: b7e6721e2aafbde4ebe70412127378dd, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -19,10 +19,6 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - Texture2D_ACEE399:
-        m_Texture: {fileID: 2800000, guid: b61ec9374c28f6f43a8ae9101d733bf9, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -44,7 +40,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 821674bd12ef96542b2dea3dc53adcb3, type: 3}
+        m_Texture: {fileID: 2800000, guid: 62e911fc513090f45a25d01d5cc28859, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -72,9 +68,6 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_40DEFECD: 8.67
-    - Vector1_78AD2AF7: 1.61
-    - Vector1_80886C31: 0.052
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
@@ -92,9 +85,7 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - Color_19ED7241: {r: 1, g: 1, b: 1, a: 1}
-    - Vector2_31FC2284: {r: 0, g: 0, b: 0, a: 0}
-    - Vector2_C8AEF432: {r: 0.17, g: 2, b: 0, a: 0}
+    - Color_692A84E5: {r: 3.482202, g: 3.482202, b: 3.482202, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
