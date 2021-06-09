@@ -366,7 +366,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5263087967503745130, guid: 80d2119966b6a4b23a6a609022cdd552, type: 3}
       propertyPath: deadZone
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5263087967503745130, guid: 80d2119966b6a4b23a6a609022cdd552, type: 3}
       propertyPath: joystickName
@@ -823,11 +823,6 @@ MonoBehaviour:
   despawnedClones: []
   delays: []
   deactivatedChild: {fileID: 0}
---- !u!4 &1913169608 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4780879614622290373, guid: 67c18a858180842a5b951d7bfa781bd3, type: 3}
-  m_PrefabInstance: {fileID: 41871078789987047}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1929307316
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1193,17 +1188,9 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 41871079715209889, guid: 67c18a858180842a5b951d7bfa781bd3, type: 3}
-      propertyPath: _spawnPos
-      value: 
-      objectReference: {fileID: 1913169608}
-    - target: {fileID: 41871079715209889, guid: 67c18a858180842a5b951d7bfa781bd3, type: 3}
       propertyPath: _attackSpellJoystick
       value: 
       objectReference: {fileID: 1941200842}
-    - target: {fileID: 41871079715209889, guid: 67c18a858180842a5b951d7bfa781bd3, type: 3}
-      propertyPath: _spellProjectilePrefab
-      value: 
-      objectReference: {fileID: 2401597820238294971, guid: 30545d04d273440afb7ea24fa27f7ddc, type: 3}
     - target: {fileID: 41871079715209890, guid: 67c18a858180842a5b951d7bfa781bd3, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -1248,10 +1235,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 41871079715209892, guid: 67c18a858180842a5b951d7bfa781bd3, type: 3}
-      propertyPath: m_AngularDrag
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 41871079715209893, guid: 67c18a858180842a5b951d7bfa781bd3, type: 3}
       propertyPath: cam
       value: 
@@ -1263,14 +1246,6 @@ PrefabInstance:
     - target: {fileID: 41871079715209894, guid: 67c18a858180842a5b951d7bfa781bd3, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 4780879614622290373, guid: 67c18a858180842a5b951d7bfa781bd3, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.332
-      objectReference: {fileID: 0}
-    - target: {fileID: 6953262211486447918, guid: 67c18a858180842a5b951d7bfa781bd3, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 67c18a858180842a5b951d7bfa781bd3, type: 3}

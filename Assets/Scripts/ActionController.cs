@@ -5,10 +5,15 @@ public class ActionController : MonoBehaviour
 {
     [SerializeField] private Transform _spawnPos;
     [SerializeField] private GameObject _spellProjectilePrefab;
-    [SerializeField] private float _projectileDistanceFactor = 5f;
     [SerializeField] private UltimateJoystick _attackSpellJoystick;
     [SerializeField] private GameObject _spellDirectionIndicator;
     
+    [SerializeField, Min(1)] float attackSpellSpeed = 5f;
+    [SerializeField, Min(1)] float attackSpellRange = 10f;
+    [SerializeField, Min(1)] float attackSpellDamage = 10f;
+
+    [SerializeField, Min(0.05f)] private float spellJoystickTresholdTime;
+
     private Transform _playerTransform;
     private bool isReleased = false;
     private bool isHolding = false;
@@ -55,13 +60,15 @@ public class ActionController : MonoBehaviour
                 Debug.Log("READY");
             }
             
-            // _spellDirectionIndicator.
-            // _spellDirectionIndicator.SetActive(true);
-
+            
+            float angle = Mathf.Atan2(_spellDirection.y, _spellDirection.x) * Mathf.Rad2Deg;
+            //_spellDirectionIndicator.transform.rotation = Quaternion.Euler(_spellDirection);
+            _spellDirectionIndicator.SetActive(true);
+            //_spellDirectionIndicator.transform.localScale = new Vector3(.1f, _attackSpellJoystick.GetDistance(), .1f);
         }
         else
         {
-            //_spellDirectionIndicator.SetActive(false);
+            _spellDirectionIndicator.SetActive(false);
         }
     }
 
@@ -73,11 +80,11 @@ public class ActionController : MonoBehaviour
             
         var spellData = spellProjectile.GetComponent<SpellBase>();
 
-        spellData.speed = 5f;
-        spellData.range = 10f;
-        spellData.damage = 10f;
+        spellData.speed = attackSpellSpeed;
+        spellData.range = attackSpellRange;
+        spellData.damage = attackSpellDamage;
         
-        if (timer > .5f) // in sec
+        if (timer > spellJoystickTresholdTime) // in sec
         {
             _spellDirection = new Vector3(_attackSpellJoystick.HorizontalAxis, _attackSpellJoystick.VerticalAxis);
             //spellProjectile.GetComponent<Rigidbody2D>().velocity = (_spellDirection).normalized * _projectileDistanceFactor;
