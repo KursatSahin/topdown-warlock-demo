@@ -7,19 +7,21 @@ public class ActionController : MonoBehaviour
     [SerializeField] private Transform _spawnPos;
     [SerializeField] private GameObject _spellProjectilePrefab;
     [SerializeField] private UltimateJoystick _attackSpellJoystick;
-    [SerializeField] private GameObject _spellDirectionIndicator;
+    [SerializeField] private SpellIndicatorUIController _spellDirectionIndicator;
     
-    [SerializeField, Min(1)] float attackSpellSpeed = 5f;
-    [SerializeField, Min(1)] float attackSpellRange = 10f;
-    [SerializeField, Min(1)] float attackSpellDamage = 10f;
+    [SerializeField, Min(1)] private float _attackSpellSpeed = 5f;
+    [SerializeField, Min(1)] private float _attackSpellRangeMultiplier = 10f;
+    [SerializeField, Min(1)] private float _attackSpellDamage = 10f;
 
     [SerializeField, Min(0.05f)] private float spellJoystickTresholdTime;
 
     private Transform _playerTransform;
-    private bool isReleased = false;
-    private bool isHolding = false;
-    private float timer;
+    private bool _isReleased = false;
+    private bool _isHolding = false;
+    private float _timer;
 
+    private float _attackSpellRange;
+    
     private Vector3 _spellDirection; 
     
     private void Awake()
@@ -35,18 +37,18 @@ public class ActionController : MonoBehaviour
 
     private void OnJoystickRelease()
     {
-        isReleased = true;
-        isHolding = false;
+        _isReleased = true;
+        _isHolding = false;
         
         CastSpell();
     }
 
     private void OnJoystickPressedDown()
     {
-        isReleased = false;
-        isHolding = true;
+        _isReleased = false;
+        _isHolding = true;
 
-        timer = 0f;
+        _timer = 0f;
     }
 
     // Update is called once per frame
@@ -54,27 +56,32 @@ public class ActionController : MonoBehaviour
     {
         if (_attackSpellJoystick.GetJoystickState())
         {
-            timer += Time.deltaTime;
+            _timer += Time.deltaTime;
 
-            if (timer > spellJoystickTresholdTime)
+            if (_timer > spellJoystickTresholdTime)
             {
                 _spellDirection = new Vector3(_attackSpellJoystick.HorizontalAxis, _attackSpellJoystick.VerticalAxis);
                 
                 float angle = Mathf.Atan2(_spellDirection.y, _spellDirection.x) * Mathf.Rad2Deg - 90f;
-                Debug.Log("angle = " + angle);
                 _spellDirectionIndicator.transform.rotation = Quaternion.Euler(new Vector3(0,0,angle));
+
+                _attackSpellRange = _attackSpellJoystick.GetDistance() * _attackSpellRangeMultiplier;
+                _spellDirectionIndicator.SetUI(_attackSpellRange);
+                Debug.Log($"Range : {_attackSpellRange} | Joystick Distance : {_attackSpellJoystick.GetDistance()}" );
+
                 
-                if (!_spellDirectionIndicator.activeSelf)
+                if (!_spellDirectionIndicator.gameObject.activeSelf)
                 {
-                    _spellDirectionIndicator.SetActive(true);    
+                    _spellDirectionIndicator.gameObject.SetActive(true);
                 }
             }
         }
         else
         {
-            if (_spellDirectionIndicator.activeSelf)
+            if (_spellDirectionIndicator.gameObject.activeSelf)
             {
-                _spellDirectionIndicator.SetActive(false);
+                _spellDirectionIndicator.ResetUI();
+                _spellDirectionIndicator.gameObject.SetActive(false);
             }
         }
     }
@@ -87,11 +94,11 @@ public class ActionController : MonoBehaviour
             
         var spellData = spellProjectile.GetComponent<SpellBase>();
 
-        spellData.speed = attackSpellSpeed;
-        spellData.range = attackSpellRange;
-        spellData.damage = attackSpellDamage;
+        spellData.speed = _attackSpellSpeed;
+        spellData.range = _attackSpellRange;
+        spellData.damage = _attackSpellDamage;
         
-        if (timer > spellJoystickTresholdTime) // in sec
+        if (_timer > spellJoystickTresholdTime) // in sec
         {
             //spellProjectile.GetComponent<Rigidbody2D>().velocity = (_spellDirection).normalized * _projectileDistanceFactor;
             spellData.direction =  (_spellDirection.normalized);
