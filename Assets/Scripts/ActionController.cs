@@ -56,7 +56,7 @@ public class ActionController : MonoBehaviour
         {
             timer += Time.deltaTime;
 
-            if (timer > .5f)
+            if (timer > spellJoystickTresholdTime)
             {
                 _spellDirection = new Vector3(_attackSpellJoystick.HorizontalAxis, _attackSpellJoystick.VerticalAxis);
                 
