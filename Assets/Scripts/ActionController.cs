@@ -1,3 +1,4 @@
+using DG.Tweening;
 using Lean.Pool;
 using UnityEngine;
 
@@ -57,18 +58,24 @@ public class ActionController : MonoBehaviour
 
             if (timer > .5f)
             {
-                Debug.Log("READY");
+                _spellDirection = new Vector3(_attackSpellJoystick.HorizontalAxis, _attackSpellJoystick.VerticalAxis);
+                
+                float angle = Mathf.Atan2(_spellDirection.y, _spellDirection.x) * Mathf.Rad2Deg - 90f;
+                Debug.Log("angle = " + angle);
+                _spellDirectionIndicator.transform.rotation = Quaternion.Euler(new Vector3(0,0,angle));
+                
+                if (!_spellDirectionIndicator.activeSelf)
+                {
+                    _spellDirectionIndicator.SetActive(true);    
+                }
             }
-            
-            
-            float angle = Mathf.Atan2(_spellDirection.y, _spellDirection.x) * Mathf.Rad2Deg;
-            //_spellDirectionIndicator.transform.rotation = Quaternion.Euler(_spellDirection);
-            _spellDirectionIndicator.SetActive(true);
-            //_spellDirectionIndicator.transform.localScale = new Vector3(.1f, _attackSpellJoystick.GetDistance(), .1f);
         }
         else
         {
-            _spellDirectionIndicator.SetActive(false);
+            if (_spellDirectionIndicator.activeSelf)
+            {
+                _spellDirectionIndicator.SetActive(false);
+            }
         }
     }
 
@@ -86,7 +93,6 @@ public class ActionController : MonoBehaviour
         
         if (timer > spellJoystickTresholdTime) // in sec
         {
-            _spellDirection = new Vector3(_attackSpellJoystick.HorizontalAxis, _attackSpellJoystick.VerticalAxis);
             //spellProjectile.GetComponent<Rigidbody2D>().velocity = (_spellDirection).normalized * _projectileDistanceFactor;
             spellData.direction =  (_spellDirection.normalized);
         }
