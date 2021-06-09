@@ -22,8 +22,8 @@ public class SpellIndicatorUIController : MonoBehaviour
 
     public void SetUI(float height)
     {
-        _srIndicatorTail.size = new Vector2(_srIndicatorTail.size.x, defaultHeightOfTail + height - 1.5f);
-        _indicatorHead.localPosition = new Vector3(_indicatorHead.localPosition.x, defaultYPositionOfHead + height - 1.5f );
+        _srIndicatorTail.size = new Vector2(_srIndicatorTail.size.x, defaultHeightOfTail + height - 2.5f);
+        _indicatorHead.localPosition = new Vector3(_indicatorHead.localPosition.x, defaultYPositionOfHead + height - 2.5f );
     }
     
     public void ResetUI()

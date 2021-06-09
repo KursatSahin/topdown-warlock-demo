@@ -52,7 +52,7 @@ public class PlayerMovementController : MonoBehaviour
         {
             // Move forward Rotation
             Vector2 lookingDirection = _movementVector;
-            float angle = Mathf.Atan2(lookingDirection.y, lookingDirection.x) * Mathf.Rad2Deg;
+            float angle = Mathf.Atan2(lookingDirection.y, lookingDirection.x) * Mathf.Rad2Deg - 90f;
             
             // Mouse Rotation
             // Vector2 lookDir = _mousePos - _rigidbody.position;

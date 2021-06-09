@@ -67,7 +67,7 @@ public class ActionController : MonoBehaviour
 
                 _attackSpellRange = _attackSpellJoystick.GetDistance() * _attackSpellRangeMultiplier;
                 _spellDirectionIndicator.SetUI(_attackSpellRange);
-                Debug.Log($"Range : {_attackSpellRange} | Joystick Distance : {_attackSpellJoystick.GetDistance()}" );
+                //Debug.Log($"Range : {_attackSpellRange} | Joystick Distance : {_attackSpellJoystick.GetDistance()}" );
 
                 
                 if (!_spellDirectionIndicator.gameObject.activeSelf)
@@ -90,8 +90,7 @@ public class ActionController : MonoBehaviour
     {
         var spellProjectile = LeanPool.Spawn(_spellProjectilePrefab);
         spellProjectile.transform.position = _spawnPos.position;
-        _spawnPos.transform.rotation = _playerTransform.rotation;
-            
+
         var spellData = spellProjectile.GetComponent<SpellBase>();
 
         spellData.speed = _attackSpellSpeed;
@@ -102,13 +101,21 @@ public class ActionController : MonoBehaviour
         {
             //spellProjectile.GetComponent<Rigidbody2D>().velocity = (_spellDirection).normalized * _projectileDistanceFactor;
             spellData.direction =  (_spellDirection.normalized);
+            
+            float angle = Mathf.Atan2(_spellDirection.y, _spellDirection.x) * Mathf.Rad2Deg - 90f;
+            spellProjectile.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
         }
         else
         {
             //spellProjectile.GetComponent<Rigidbody2D>().velocity = (_spawnPos.position - _playerTransform.transform.position).normalized * _projectileDistanceFactor;
-            spellData.direction =  (_spawnPos.position - _playerTransform.transform.position).normalized;
+
+            var temp = (_spawnPos.position - _playerTransform.transform.position);
+            spellData.direction =  (temp).normalized;
+            
+            float angle = Mathf.Atan2(temp.y, temp.x) * Mathf.Rad2Deg - 90f;
+            spellProjectile.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
         }
-        
+
         spellProjectile.SetActive(true);
     }
 }
