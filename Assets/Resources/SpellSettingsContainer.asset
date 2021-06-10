@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackSpellSpeed: 5
   attackSpellRangeMultiplier: 15
-  attackSpellDamage: 10
+  attackSpellDamage: 70
   attackExplosionDuration: 1.4
