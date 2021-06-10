@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using DG.Tweening;
 using Lean.Pool;
 using UnityEngine;
 using Utils;
@@ -18,6 +19,7 @@ public class GameManager : MonoBehaviour
     private GameObject _genericPlayerPrefab;
 
     [SerializeField] private ParticleSystem[] _fogSystems;
+    [SerializeField] private GameObject _circleAreaIndicator;
 
     // Start is called before the first frame update
     void Start()
@@ -30,12 +32,21 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.A))
         {
-            for (int i = 0; i < _fogSystems.Length; i++)
-            {
-                var shapeModule = _fogSystems[i].shape;
-                shapeModule.radiusThickness += .2f;
-            }
+            ShrinkFogAndRedline();
         }
+    }
+
+    private void ShrinkFogAndRedline()
+    {
+        for (int i = 0; i < _fogSystems.Length; i++)
+        {
+            var shapeModule = _fogSystems[i].shape;
+            shapeModule.radiusThickness += .2f;
+        }
+
+        var circleScale = _circleAreaIndicator.transform.localScale;
+        _circleAreaIndicator.transform.DOScale((new Vector3(circleScale.x - 1f, circleScale.y - 1f, circleScale.z)),8f);
+
     }
 
     public void OnHeroSelectionButtonClick(int id)
