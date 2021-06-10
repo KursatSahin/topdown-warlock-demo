@@ -67,8 +67,11 @@ public class GameManager : MonoBehaviour
                 break;
         }
 
+        
         var spawnedPlayerView = LeanPool.Spawn(_genericPlayerPrefab).GetComponent<PlayerView>();
         spawnedPlayerView.SetHero(selectedHeroData);
+        
+        Camera.main.transform.GetComponent<CameraFollow>().target = spawnedPlayerView.transform;
         
         spawnedPlayerView.transform.position = new Vector3(0, 0, -1);
         _playerActionController.playerView = _playerMovementController.playerView = spawnedPlayerView;
