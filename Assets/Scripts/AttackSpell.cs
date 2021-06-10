@@ -1,8 +1,13 @@
 using System;
 using UnityEngine;
 
-public class FireSpell : SpellBase
+public class AttackSpell : SpellBase
 {
+    [HideInInspector] public float speed;
+    [HideInInspector] public Vector2 direction;
+    [HideInInspector] public float range;
+    [HideInInspector] public float damage;
+
     private float _distance;
 
     #region Unity Events

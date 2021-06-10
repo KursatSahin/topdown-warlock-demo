@@ -1,33 +1,24 @@
 using DG.Tweening;
 using Lean.Pool;
 using UnityEngine;
+using static Utils.ContainerFacade;
 
-public class ActionController : MonoBehaviour
+public class PlayerActionController : MonoBehaviour
 {
-    [SerializeField] private Transform _spawnPos;
+    [SerializeField] public PlayerView playerView;
+    
     [SerializeField] private GameObject _spellProjectilePrefab;
     [SerializeField] private UltimateJoystick _attackSpellJoystick;
-    [SerializeField] private SpellIndicatorUIController _spellDirectionIndicator;
-    
-    [SerializeField, Min(1)] private float _attackSpellSpeed = 5f;
-    [SerializeField, Min(1)] private float _attackSpellRangeMultiplier = 10f;
-    [SerializeField, Min(1)] private float _attackSpellDamage = 10f;
 
     [SerializeField, Min(0.05f)] private float spellJoystickTresholdTime;
 
-    private Transform _playerTransform;
     private bool _isReleased = false;
     private bool _isHolding = false;
     private float _timer;
 
     private float _attackSpellRange;
     
-    private Vector3 _spellDirection; 
-    
-    private void Awake()
-    {
-        _playerTransform = GetComponent<Transform>();
-    }
+    private Vector3 _spellDirection;
 
     private void OnEnable()
     {
@@ -63,25 +54,25 @@ public class ActionController : MonoBehaviour
                 _spellDirection = new Vector3(_attackSpellJoystick.HorizontalAxis, _attackSpellJoystick.VerticalAxis);
                 
                 float angle = Mathf.Atan2(_spellDirection.y, _spellDirection.x) * Mathf.Rad2Deg - 90f;
-                _spellDirectionIndicator.transform.rotation = Quaternion.Euler(new Vector3(0,0,angle));
+                playerView.spellIndicator.transform.rotation = Quaternion.Euler(new Vector3(0,0,angle));
 
-                _attackSpellRange = _attackSpellJoystick.GetDistance() * _attackSpellRangeMultiplier;
-                _spellDirectionIndicator.SetUI(_attackSpellRange);
+                _attackSpellRange = _attackSpellJoystick.GetDistance() * SpellSettings.attackSpellRangeMultiplier;
+                playerView.spellIndicator.SetUI(_attackSpellRange);
                 //Debug.Log($"Range : {_attackSpellRange} | Joystick Distance : {_attackSpellJoystick.GetDistance()}" );
 
                 
-                if (!_spellDirectionIndicator.gameObject.activeSelf)
+                if (!playerView.spellIndicator.gameObject.activeSelf)
                 {
-                    _spellDirectionIndicator.gameObject.SetActive(true);
+                    playerView.spellIndicator.gameObject.SetActive(true);
                 }
             }
         }
         else
         {
-            if (_spellDirectionIndicator.gameObject.activeSelf)
+            if (playerView.spellIndicator.gameObject.activeSelf)
             {
-                _spellDirectionIndicator.ResetUI();
-                _spellDirectionIndicator.gameObject.SetActive(false);
+                playerView.spellIndicator.ResetUI();
+                playerView.spellIndicator.gameObject.SetActive(false);
             }
         }
     }
@@ -89,13 +80,13 @@ public class ActionController : MonoBehaviour
     private void CastSpell()
     {
         var spellProjectile = LeanPool.Spawn(_spellProjectilePrefab);
-        spellProjectile.transform.position = _spawnPos.position;
+        spellProjectile.transform.position = playerView.projectileSpawnPosition.position;
 
-        var spellData = spellProjectile.GetComponent<SpellBase>();
+        var spellData = spellProjectile.GetComponent<AttackSpell>();
 
-        spellData.speed = _attackSpellSpeed;
+        spellData.speed = SpellSettings.attackSpellSpeed;
         spellData.range = _attackSpellRange;
-        spellData.damage = _attackSpellDamage;
+        spellData.damage = SpellSettings.attackSpellDamage;
         
         if (_timer > spellJoystickTresholdTime) // in sec
         {
@@ -109,7 +100,7 @@ public class ActionController : MonoBehaviour
         {
             //spellProjectile.GetComponent<Rigidbody2D>().velocity = (_spawnPos.position - _playerTransform.transform.position).normalized * _projectileDistanceFactor;
 
-            var temp = (_spawnPos.position - _playerTransform.transform.position);
+            var temp = (playerView.projectileSpawnPosition.position - playerView.playerTransform.transform.position);
             spellData.direction =  (temp).normalized;
             
             float angle = Mathf.Atan2(temp.y, temp.x) * Mathf.Rad2Deg - 90f;
@@ -117,5 +108,11 @@ public class ActionController : MonoBehaviour
         }
 
         spellProjectile.SetActive(true);
+        
+        #region Attack Spell Scope
+
+        
+
+        #endregion End of Attack Spell Scope
     }
 }

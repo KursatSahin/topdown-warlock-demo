@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f852681bf3914c31b72447ba5068fc6d, type: 3}
+  m_Name: HeroDataContainer
+  m_EditorClassIdentifier: 
+  zeus:
+    firstFrame: {fileID: 21300000, guid: 981a520eb9c3a80408281bf5eb85079c, type: 3}
+    prefab: {fileID: 4369832643534464365, guid: d5eacff5be5ba8e4f8f7c9b6f6cb0950, type: 3}
+    spellVfx: {fileID: 8285861361621987497, guid: d62f0510c43ef184e965e59ac172c648, type: 3}
+    spellImpactVfx: {fileID: 3412676202932508600, guid: 906a72036d3799b4da3ac9e4b1dbb2fe, type: 3}
+    animatorController: {fileID: 9100000, guid: 00bb752eb2310d843add972fa31f7bf0, type: 2}
+  poseidon:
+    firstFrame: {fileID: 21300000, guid: 138c19c65f2cb7340862418db3dec002, type: 3}
+    prefab: {fileID: 7327434036458627938, guid: 2d9878ca502b64443ac2ee03f6f02300, type: 3}
+    spellVfx: {fileID: 3136465084938023480, guid: 5d09251cff11a3a45ac9b0520d436b5e, type: 3}
+    spellImpactVfx: {fileID: 5484160717646761017, guid: adcb659c1ece99f4790963b8ddfbc3c5, type: 3}
+    animatorController: {fileID: 9100000, guid: d4e2e88798e3a9a468cfdecaea910301, type: 2}
+  hades:
+    firstFrame: {fileID: 21300000, guid: cfcdf519e0681fd44b247e35aa4b24b7, type: 3}
+    prefab: {fileID: 974215430116262465, guid: 983a4508512424240aa4612e43bcfdc2, type: 3}
+    spellVfx: {fileID: 1502307130000813271, guid: b5643ce8153853548a444342e98bc46f, type: 3}
+    spellImpactVfx: {fileID: 1882650416675095985, guid: 5ebb7dab84e75094aa1d7803b5da8898, type: 3}
+    animatorController: {fileID: 9100000, guid: e4bc4668d62bec547a2b6d174f55f7e5, type: 2}

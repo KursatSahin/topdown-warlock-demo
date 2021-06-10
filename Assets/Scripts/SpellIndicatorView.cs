@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpellIndicatorUIController : MonoBehaviour
+public class SpellIndicatorView : MonoBehaviour
 {
     private Transform _indicatorTail;
     private Transform _indicatorHead;
