@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class FireSpell : SpellBase
@@ -22,5 +23,6 @@ public class FireSpell : SpellBase
             Explode();
         }
     }
+    
     #endregion
 }

@@ -47,7 +47,7 @@ public class PlayerMovementController : MonoBehaviour
     void FixedUpdate()
     {
         _rigidbody.MovePosition(_rigidbody.position + _movementVector * moveSpeed * Time.fixedDeltaTime);
-        
+
         if (_movementJoystick.GetJoystickState())
         {
             // Move forward Rotation
