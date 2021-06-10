@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49b73ecb46dc42e48c51d2452e6299f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cooldown: 0
   speed: 0
   direction: {x: 0, y: 0}
   range: 0
@@ -64,7 +65,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 6
+  m_Radius: 3
 --- !u!1001 &9067336669093643574
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -90,11 +91,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2604660782164547038, guid: d62f0510c43ef184e965e59ac172c648, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2604660782164547038, guid: d62f0510c43ef184e965e59ac172c648, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.55
+      value: -7.97
       objectReference: {fileID: 0}
     - target: {fileID: 2604660782164547038, guid: d62f0510c43ef184e965e59ac172c648, type: 3}
       propertyPath: m_LocalPosition.z

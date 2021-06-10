@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: SpellSettingsContainer
   m_EditorClassIdentifier: 
   attackSpellSpeed: 5
-  attackSpellRangeMultiplier: 5
+  attackSpellRangeMultiplier: 15
   attackSpellDamage: 10
+  attackExplosionDuration: 1.4

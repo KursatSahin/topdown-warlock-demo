@@ -5,12 +5,26 @@ namespace DefaultNamespace
 {
     public class Hero
     {
-        
-    }
+        public HeroVitals vitals;
 
-    public class VitalData
+        public Hero()
+        {
+            vitals = new HeroVitals();
+        }
+    }
+    
+    public class HeroVitals
     {
         public float health;
-        public float movementSpeed;
+
+        public HeroVitals()
+        {
+            health = 0;
+        }
+    }
+
+    public class HeroStats
+    {
+        
     }
 }

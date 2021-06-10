@@ -1,16 +1,19 @@
 using DG.Tweening;
 using Lean.Pool;
 using UnityEngine;
+using WarlockBrawls.Utils;
 using static Utils.ContainerFacade;
 
 public class PlayerActionController : MonoBehaviour
 {
     [SerializeField] public PlayerView playerView;
     
-    [SerializeField] private GameObject _spellProjectilePrefab;
+    [SerializeField] public GameObject spellProjectilePrefab;
     [SerializeField] private UltimateJoystick _attackSpellJoystick;
 
     [SerializeField, Min(0.05f)] private float spellJoystickTresholdTime;
+    
+    [HideInInspector] public HeroData selectedHeroData;
 
     private bool _isReleased = false;
     private bool _isHolding = false;
@@ -79,19 +82,20 @@ public class PlayerActionController : MonoBehaviour
 
     private void CastSpell()
     {
-        var spellProjectile = LeanPool.Spawn(_spellProjectilePrefab);
+        var spellProjectile = LeanPool.Spawn(spellProjectilePrefab);
         spellProjectile.transform.position = playerView.projectileSpawnPosition.position;
 
-        var spellData = spellProjectile.GetComponent<AttackSpell>();
+        var attackSpellData = spellProjectile.GetComponent<AttackSpell>();
 
-        spellData.speed = SpellSettings.attackSpellSpeed;
-        spellData.range = _attackSpellRange;
-        spellData.damage = SpellSettings.attackSpellDamage;
+        attackSpellData.speed = SpellSettings.attackSpellSpeed;
+        attackSpellData.range = _attackSpellRange;
+        attackSpellData.damage = SpellSettings.attackSpellDamage;
+        attackSpellData.hitVfxPrefab = selectedHeroData.spellImpactVfx;
         
         if (_timer > spellJoystickTresholdTime) // in sec
         {
             //spellProjectile.GetComponent<Rigidbody2D>().velocity = (_spellDirection).normalized * _projectileDistanceFactor;
-            spellData.direction =  (_spellDirection.normalized);
+            attackSpellData.direction =  (_spellDirection.normalized);
             
             float angle = Mathf.Atan2(_spellDirection.y, _spellDirection.x) * Mathf.Rad2Deg - 90f;
             spellProjectile.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
@@ -101,7 +105,7 @@ public class PlayerActionController : MonoBehaviour
             //spellProjectile.GetComponent<Rigidbody2D>().velocity = (_spawnPos.position - _playerTransform.transform.position).normalized * _projectileDistanceFactor;
 
             var temp = (playerView.projectileSpawnPosition.position - playerView.playerTransform.transform.position);
-            spellData.direction =  (temp).normalized;
+            attackSpellData.direction =  (temp).normalized;
             
             float angle = Mathf.Atan2(temp.y, temp.x) * Mathf.Rad2Deg - 90f;
             spellProjectile.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));

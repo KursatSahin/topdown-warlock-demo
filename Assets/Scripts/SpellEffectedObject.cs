@@ -18,15 +18,18 @@ public class SpellEffectedObject : MonoBehaviour
     {
         if (other.CompareTag("Spell"))
         {
-            var spellBase = other.GetComponent<SpellBase>();
+            var spellBase = other.GetComponent<AttackSpell>();
             // TODO : spellBase.damage
 
-            _rb.AddExplosionForcev2(explosionSettings.ExplosionForce, other.transform.position,
+            _rb.AddExplosionForce(explosionSettings.ExplosionForce, other.transform.position,
                 explosionSettings.ExplosionRadius);
             
-            //_rb.AddForce(Vector2.left*1000);
-            
-            LeanPool.Despawn(other.gameObject);
+            spellBase.Explode(false);
+
+            if (TryGetComponent(out PlayerView playerView))
+            {
+                playerView.GetDamaged(spellBase.damage);
+            }
         }
     }
 }

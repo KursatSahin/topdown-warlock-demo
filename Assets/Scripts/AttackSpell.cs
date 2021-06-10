@@ -1,8 +1,10 @@
 using System;
+using Lean.Pool;
 using UnityEngine;
 
 public class AttackSpell : SpellBase
 {
+    [HideInInspector] public GameObject hitVfxPrefab;
     [HideInInspector] public float speed;
     [HideInInspector] public Vector2 direction;
     [HideInInspector] public float range;
@@ -25,9 +27,27 @@ public class AttackSpell : SpellBase
 
         if(_distance > range)
         {
-            Explode();
+            Explode(true);
         }
     }
-    
+
+    public void Explode(bool withoutExplosion)
+    {
+        if (withoutExplosion)
+        {
+            base.Explode();
+        }
+        else
+        {
+            Debug.Log("Explosion created");
+            var explosion = LeanPool.Spawn(hitVfxPrefab);
+            explosion.transform.position = transform.position;
+        
+            explosion.SetActive(true);
+
+            base.Explode();
+        }
+    }
+
     #endregion
 }
