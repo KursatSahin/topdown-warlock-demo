@@ -811,29 +811,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 547448134527170337, guid: 28053fa513d14524db09ff29ef8e3278, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 547448134527170337, guid: 28053fa513d14524db09ff29ef8e3278, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 1368623760687747916, guid: 28053fa513d14524db09ff29ef8e3278, type: 3}
       propertyPath: m_RootOrder
       value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1368623760687747916, guid: 28053fa513d14524db09ff29ef8e3278, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1368623760687747916, guid: 28053fa513d14524db09ff29ef8e3278, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1368623760687747916, guid: 28053fa513d14524db09ff29ef8e3278, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1368623760687747916, guid: 28053fa513d14524db09ff29ef8e3278, type: 3}
       propertyPath: m_LocalPosition.x
@@ -875,29 +855,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3959518459114157544, guid: 28053fa513d14524db09ff29ef8e3278, type: 3}
-      propertyPath: m_SortingOrder
-      value: -1
-      objectReference: {fileID: 0}
     - target: {fileID: 5212225408664810303, guid: 28053fa513d14524db09ff29ef8e3278, type: 3}
       propertyPath: m_Name
       value: NewGreatEnvironment
-      objectReference: {fileID: 0}
-    - target: {fileID: 6620256657661401272, guid: 28053fa513d14524db09ff29ef8e3278, type: 3}
-      propertyPath: m_Size.y
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 7633695926470195877, guid: 28053fa513d14524db09ff29ef8e3278, type: 3}
-      propertyPath: m_Offset.y
-      value: -10
-      objectReference: {fileID: 0}
-    - target: {fileID: 8029438917024681085, guid: 28053fa513d14524db09ff29ef8e3278, type: 3}
-      propertyPath: m_Size.y
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 8054115540198006381, guid: 28053fa513d14524db09ff29ef8e3278, type: 3}
-      propertyPath: m_Offset.y
-      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 28053fa513d14524db09ff29ef8e3278, type: 3}

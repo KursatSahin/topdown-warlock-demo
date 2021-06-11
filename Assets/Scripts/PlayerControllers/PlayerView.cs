@@ -20,6 +20,8 @@ public class PlayerView : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     private Animator _animator;
     public float distanceFromOrigin;
+
+    private bool insideCircle = true;
     
     public float poisonTime = 0;
     
@@ -40,7 +42,11 @@ public class PlayerView : MonoBehaviour
         
         if (distanceFromOrigin > GameManager.circleAreaRadius)
         {
-            EventManager.GetInstance().Notify(Events.OutOfCircle);
+            if (insideCircle)
+            {
+                insideCircle = false;
+                EventManager.GetInstance().Notify(Events.OutOfCircle);
+            }
             poisonTime += Time.deltaTime;
             if (poisonTime > SpellSettings.poisonInterval)
             {
@@ -50,7 +56,11 @@ public class PlayerView : MonoBehaviour
         }
         else
         {
-            EventManager.GetInstance().Notify(Events.InsideOfCircle);
+            if (!insideCircle)
+            {
+                insideCircle = true;
+                EventManager.GetInstance().Notify(Events.InsideOfCircle);
+            }
             poisonTime = 0;
         }
     }

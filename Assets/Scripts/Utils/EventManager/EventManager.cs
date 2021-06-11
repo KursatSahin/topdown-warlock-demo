@@ -68,7 +68,7 @@ namespace Utils
 
         public void Notify(string eventName, object data = null)
         {
-            Debug.LogFormat("Notify Event: {0} => {1}", eventName, data);
+            Debug.LogFormat($"Notify Event: {eventName} => {data}");
             var notifiedHandlers = new List<Handler>();
             
             lock (_locker)
