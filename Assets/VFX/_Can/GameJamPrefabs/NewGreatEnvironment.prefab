@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6357512300691298421}
   - component: {fileID: 7456068257668380730}
   - component: {fileID: 327828686292368544}
+  - component: {fileID: 5330984117516760921}
   m_Layer: 0
   m_Name: Obstackle2 (1)
   m_TagString: Untagged
@@ -131,6 +132,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.98, y: 2.98}
   m_EdgeRadius: 0
+--- !u!114 &5330984117516760921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 50152801133933257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 093d62e0819a14facb1d59ba341c460f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosionSettings: {fileID: 11400000, guid: f6b9e3f8cb1e24bd49e888b01305a6cd, type: 2}
 --- !u!1 &347810458272071078
 GameObject:
   m_ObjectHideFlags: 0
@@ -365,6 +379,7 @@ GameObject:
   - component: {fileID: 9130956017980225699}
   - component: {fileID: 7530807228869841607}
   - component: {fileID: 1670715695135529332}
+  - component: {fileID: 7944864136427942361}
   m_Layer: 0
   m_Name: Obstackle2 (2)
   m_TagString: Untagged
@@ -484,6 +499,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.98, y: 2.98}
   m_EdgeRadius: 0
+--- !u!114 &7944864136427942361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2649012518436200467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 093d62e0819a14facb1d59ba341c460f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosionSettings: {fileID: 11400000, guid: f6b9e3f8cb1e24bd49e888b01305a6cd, type: 2}
 --- !u!1 &2677545987453382232
 GameObject:
   m_ObjectHideFlags: 0
@@ -740,6 +768,7 @@ GameObject:
   - component: {fileID: 3427397610534496911}
   - component: {fileID: 3500418937401053482}
   - component: {fileID: 7715723826095285263}
+  - component: {fileID: 1230486845539870496}
   m_Layer: 0
   m_Name: Obstackle2
   m_TagString: Untagged
@@ -849,6 +878,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
+--- !u!114 &1230486845539870496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4000639456445363740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 093d62e0819a14facb1d59ba341c460f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosionSettings: {fileID: 11400000, guid: f6b9e3f8cb1e24bd49e888b01305a6cd, type: 2}
 --- !u!1 &5212225408664810303
 GameObject:
   m_ObjectHideFlags: 0
@@ -896,6 +938,7 @@ GameObject:
   - component: {fileID: 9119443787608520555}
   - component: {fileID: 8081666517999709180}
   - component: {fileID: 2783923129236551622}
+  - component: {fileID: 3657060385743387445}
   m_Layer: 0
   m_Name: Obstackle2 (3)
   m_TagString: Untagged
@@ -1015,6 +1058,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.98, y: 2.98}
   m_EdgeRadius: 0
+--- !u!114 &3657060385743387445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6318297287974847728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 093d62e0819a14facb1d59ba341c460f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosionSettings: {fileID: 11400000, guid: f6b9e3f8cb1e24bd49e888b01305a6cd, type: 2}
 --- !u!1 &8798192393215443946
 GameObject:
   m_ObjectHideFlags: 0
