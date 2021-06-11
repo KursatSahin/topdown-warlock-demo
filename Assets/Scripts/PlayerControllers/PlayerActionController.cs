@@ -16,6 +16,8 @@ public class PlayerActionController : MonoBehaviour
     [SerializeField, Min(0.05f)] private float spellJoystickTresholdTime;
     
     [HideInInspector] public HeroData selectedHeroData;
+    
+    private Animator _playerAnimator;
 
     private bool _isReleased = false;
     private bool _isHolding = false;
@@ -24,6 +26,11 @@ public class PlayerActionController : MonoBehaviour
     private float _attackSpellRange;
     
     private Vector3 _spellDirection;
+
+    private void Awake()
+    {
+        _playerAnimator = playerView.GetComponent<Animator>();
+    }
 
     private void OnEnable()
     {
@@ -135,6 +142,10 @@ public class PlayerActionController : MonoBehaviour
             spellProjectile.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
         }
 
+        _playerAnimator.SetBool("Walk", false);
+        _playerAnimator.SetBool("Glide", true);
+        _playerAnimator.SetBool("Attack", false);
+        
         //spellProjectile.SetActive(true);
         attackSpellData.ThrowSpell(playerView.playerTransform);
 

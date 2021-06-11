@@ -18,7 +18,7 @@ public class PlayerMovementController : MonoBehaviour
     [SerializeField] public PlayerView playerView;
 
     private Transform _playerTransform;
-
+    private Animator _playerAnimator;
     public Camera cam;
     
     private Rigidbody2D _rigidbody;
@@ -29,6 +29,11 @@ public class PlayerMovementController : MonoBehaviour
     void Awake()
     {
         _rigidbody = playerView.playerTransform.GetComponent<Rigidbody2D>();
+        _playerAnimator = playerView.GetComponent<Animator>();
+        
+        _playerAnimator.SetBool("Walk", true);
+        _playerAnimator.SetBool("Glide", false);
+        _playerAnimator.SetBool("Attack", false);
     }
 
     private void OnEnable()
@@ -54,15 +59,29 @@ public class PlayerMovementController : MonoBehaviour
     void FixedUpdate()
     {
         #region Movement Scope
-        if (_movementJoystick.GetJoystickState() && _dashButton.interactable)
-        {
-            _rigidbody.MovePosition(_rigidbody.position + _movementVector * _moveSpeed * Time.fixedDeltaTime);
-            
-            // Move forward Rotation
-            Vector2 lookingDirection = _movementVector;
-            float angle = Mathf.Atan2(lookingDirection.y, lookingDirection.x) * Mathf.Rad2Deg - 90f;
 
-            _rigidbody.rotation = angle;
+        if (_dashButton.interactable)
+        {
+            if (_movementJoystick.GetJoystickState())
+            {
+                _playerAnimator.SetBool("Walk", true);
+                _playerAnimator.SetBool("Glide", false);
+                _playerAnimator.SetBool("Attack", false);
+                
+                _rigidbody.MovePosition(_rigidbody.position + _movementVector * _moveSpeed * Time.fixedDeltaTime);
+                
+                // Move forward Rotation
+                Vector2 lookingDirection = _movementVector;
+                float angle = Mathf.Atan2(lookingDirection.y, lookingDirection.x) * Mathf.Rad2Deg - 90f;
+
+                _rigidbody.rotation = angle;
+            }
+            else
+            {
+                _playerAnimator.SetBool("Walk", false);
+                _playerAnimator.SetBool("Glide", false);
+                _playerAnimator.SetBool("Attack", false);
+            }
         }
         #endregion End of Movement Scope
     }
@@ -85,6 +104,9 @@ public class PlayerMovementController : MonoBehaviour
         
         _rigidbody.transform.DOMove(dashPosition,.2f).OnStart((() =>
         {
+            _playerAnimator.SetBool("Walk", false);
+            _playerAnimator.SetBool("Glide", true);
+            _playerAnimator.SetBool("Attack", false);
             _dashButton.interactable = false;
         })).OnComplete((() =>
         {
