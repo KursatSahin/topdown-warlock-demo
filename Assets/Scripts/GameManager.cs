@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using DG.Tweening;
 using Lean.Pool;
@@ -20,19 +21,39 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private ParticleSystem[] _fogSystems;
     [SerializeField] private GameObject _circleAreaIndicator;
+    [SerializeField] private GameObject _circleAreaHandle;
+    public static float circleAreaRadius = 0;
+
+    [SerializeField] private float gameTime = 0;
+    [SerializeField] private float collapseTime = 0;
+    [SerializeField] private int maxCollapseAmount = 3;
+    [SerializeField] private float collapseInterval = 30;
+
+    private int collapseAmount = 0;
 
     // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        
+        Time.timeScale = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.A))
+        var deltaTime = Time.deltaTime;
+        collapseTime += deltaTime;
+        gameTime += deltaTime;
+
+        circleAreaRadius = Vector2.Distance(_circleAreaHandle.transform.position, Vector2.zero);
+        
+        if (collapseTime > collapseInterval)
         {
-            ShrinkFogAndRedline();
+            collapseTime = 0;
+            if (collapseAmount < maxCollapseAmount)
+            {
+                ShrinkFogAndRedline();
+                collapseAmount++;
+            }
         }
     }
 
@@ -91,6 +112,9 @@ public class GameManager : MonoBehaviour
         
         _playerActionController.gameObject.SetActive(true);
         _playerMovementController.gameObject.SetActive(true);
+        
+        Time.timeScale = 1;
+        collapseTime = gameTime = 0;
     }
 
     public enum HeroTypes

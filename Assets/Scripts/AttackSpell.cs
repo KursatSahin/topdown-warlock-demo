@@ -59,7 +59,7 @@ public class AttackSpell : SpellBase
             gameObject.SetActive(true);
             
             EventManager.GetInstance().Notify(Events.ThrowSpellEnd);
-            transform.DOMove(transform.position + (Vector3)direction.normalized * range, range/speed).OnComplete((() =>
+            transform.DOMove(transform.position + (Vector3)direction.normalized * range, range/speed).SetEase(Ease.Linear).OnComplete((() =>
             {
                 Explode(true);
             }));

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75260dd22bd24fe0939ba8fb961a4d31, type: 3}
   m_Name: SpellSettingsContainer
   m_EditorClassIdentifier: 
-  attackSpellSpeed: 5
+  attackSpellSpeed: 10
   attackSpellRangeMultiplier: 15
   attackSpellDamage: 70
   attackExplosionDuration: 1.4
