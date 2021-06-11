@@ -24,7 +24,9 @@ public class PlayerMovementController : MonoBehaviour
     private Rigidbody2D _rigidbody;
     private Vector2 _movementVector;
 
-    private bool throwingSpell = false;
+    private bool _throwingSpell = false;
+
+    private bool _insideCircle = true;
 
     void Awake()
     {
@@ -40,12 +42,16 @@ public class PlayerMovementController : MonoBehaviour
     {
         EventManager.GetInstance().AddHandler(Events.ThrowSpellStart, OnThrowSpellStart);
         EventManager.GetInstance().AddHandler(Events.ThrowSpellEnd, OnThrowSpellEnd);
+        EventManager.GetInstance().AddHandler(Events.OutOfCircle, OnOutOfCircle);
+        EventManager.GetInstance().AddHandler(Events.InsideOfCircle, OnInsideOfCircle);
     }
 
     private void OnDisable()
     {
         EventManager.GetInstance().RemoveHandler(Events.ThrowSpellStart, OnThrowSpellStart);
         EventManager.GetInstance().RemoveHandler(Events.ThrowSpellEnd, OnThrowSpellEnd);
+        EventManager.GetInstance().RemoveHandler(Events.OutOfCircle, OnOutOfCircle);
+        EventManager.GetInstance().RemoveHandler(Events.InsideOfCircle, OnInsideOfCircle);
     }
 
     void Update()
@@ -64,9 +70,19 @@ public class PlayerMovementController : MonoBehaviour
         {
             if (_movementJoystick.GetJoystickState())
             {
-                _playerAnimator.SetBool("Walk", true);
-                _playerAnimator.SetBool("Glide", false);
-                _playerAnimator.SetBool("Attack", false);
+                if (_insideCircle)
+                {
+                    _playerAnimator.SetBool("Walk", true);
+                    _playerAnimator.SetBool("Glide", false);
+                    _playerAnimator.SetBool("Attack", false);
+                }
+                else
+                {
+                    _playerAnimator.SetBool("Walk", false);
+                    _playerAnimator.SetBool("Glide", true);
+                    _playerAnimator.SetBool("Attack", false);
+                }
+
                 
                 _rigidbody.MovePosition(_rigidbody.position + _movementVector * _moveSpeed * Time.fixedDeltaTime);
                 
@@ -78,23 +94,42 @@ public class PlayerMovementController : MonoBehaviour
             }
             else
             {
-                _playerAnimator.SetBool("Walk", false);
-                _playerAnimator.SetBool("Glide", false);
-                _playerAnimator.SetBool("Attack", false);
+                if (_insideCircle)
+                {
+                    _playerAnimator.SetBool("Walk", false);
+                    _playerAnimator.SetBool("Glide", false);
+                    _playerAnimator.SetBool("Attack", false);
+                }
+                else
+                {
+                    _playerAnimator.SetBool("Walk", false);
+                    _playerAnimator.SetBool("Glide", true);
+                    _playerAnimator.SetBool("Attack", false);
+                }
             }
         }
         #endregion End of Movement Scope
     }
 
+    private void OnInsideOfCircle(object obj)
+    {
+        _insideCircle = true;
+    }
+
+    private void OnOutOfCircle(object obj)
+    {
+        _insideCircle = false;
+    }
+    
     private void OnThrowSpellEnd(object obj)
     {
-        throwingSpell = false;
+        _throwingSpell = false;
         _dashButton.interactable = true;
     }
 
     private void OnThrowSpellStart(object obj)
     {
-        throwingSpell = true;
+        _throwingSpell = true;
         _dashButton.interactable = false;
     }
     

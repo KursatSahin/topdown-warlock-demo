@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using DefaultNamespace;
 using Lean.Pool;
 using UnityEngine;
+using Utils;
 using WarlockBrawls.Utils;
 using static Utils.ContainerFacade;
 
@@ -39,6 +40,7 @@ public class PlayerView : MonoBehaviour
         
         if (distanceFromOrigin > GameManager.circleAreaRadius)
         {
+            EventManager.GetInstance().Notify(Events.OutOfCircle);
             poisonTime += Time.deltaTime;
             if (poisonTime > SpellSettings.poisonInterval)
             {
@@ -48,6 +50,7 @@ public class PlayerView : MonoBehaviour
         }
         else
         {
+            EventManager.GetInstance().Notify(Events.InsideOfCircle);
             poisonTime = 0;
         }
     }
