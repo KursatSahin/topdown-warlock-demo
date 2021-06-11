@@ -3,12 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
 using Lean.Pool;
+using Photon.Pun;
 using UnityEngine;
 using Utils;
 using WarlockBrawls.Utils;
 using static Utils.ContainerFacade;
 
-public class PlayerView : MonoBehaviour
+public class PlayerView : MonoBehaviourPun
 {
     public Transform playerTransform;
     public Transform projectileSpawnPosition;

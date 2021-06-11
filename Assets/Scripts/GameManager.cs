@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using DG.Tweening;
 using Lean.Pool;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Utils;
 using WarlockBrawls.Utils;
 using static Utils.ContainerFacade;
@@ -37,6 +38,17 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0;
     }
 
+    private void Start()
+    {
+        /*// in case we started this demo with the wrong scene being active, simply load the menu scene
+        if (!PhotonNetwork.IsConnected)
+        {
+            SceneManager.LoadScene("LoginScene");
+
+            return;
+        }*/
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -57,17 +69,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void ShrinkFogAndRedline()
+    #region Public Methods
+
+    public void QuitApplication()
     {
-        for (int i = 0; i < _fogSystems.Length; i++)
-        {
-            var shapeModule = _fogSystems[i].shape;
-            shapeModule.radiusThickness += .2f;
-        }
-
-        var circleScale = _circleAreaIndicator.transform.localScale;
-        _circleAreaIndicator.transform.DOScale((new Vector3(circleScale.x - 1f, circleScale.y - 1f, circleScale.z)),8f);
-
+        Application.Quit();
     }
 
     public void OnHeroSelectionButtonClick(int id)
@@ -80,7 +86,24 @@ public class GameManager : MonoBehaviour
 
         BuildHero(selectedhero);
     }
+    
+    #endregion
 
+    #region Private Methods
+
+    private void ShrinkFogAndRedline()
+    {
+        for (int i = 0; i < _fogSystems.Length; i++)
+        {
+            var shapeModule = _fogSystems[i].shape;
+            shapeModule.radiusThickness += .2f;
+        }
+
+        var circleScale = _circleAreaIndicator.transform.localScale;
+        _circleAreaIndicator.transform.DOScale((new Vector3(circleScale.x - 1f, circleScale.y - 1f, circleScale.z)),8f);
+
+    }
+    
     private void BuildHero(HeroTypes type)
     {
         HeroData selectedHeroData;
@@ -99,7 +122,7 @@ public class GameManager : MonoBehaviour
                 break;
         }
 
-        
+        //PhotonNetwork.Instantiate(_genericPlayerPrefab.name, new Vector3(-5f,0f,0f), Quaternion.identity, 0);
         var spawnedPlayerView = LeanPool.Spawn(_genericPlayerPrefab).GetComponent<PlayerView>();
         spawnedPlayerView.SetHero(selectedHeroData);
         
@@ -116,6 +139,8 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
         collapseTime = gameTime = 0;
     }
+    
+    #endregion
 
     public enum HeroTypes
     {
